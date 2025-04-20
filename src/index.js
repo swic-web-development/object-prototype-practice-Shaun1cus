@@ -7,15 +7,14 @@ import data from './data.js'
  */
 export function calculateThreatLevels(monsters) {
   // TODO: Calculate the threat level (health × damage) for each monster
-  threatLevel = health * damage
-  return monsters.map(monster => {
+  return monsters.map((monster) => {
     return {
       name: monster.name,
-      threatLevel: monster.health * monster.damage
+      threatLevel: monster.health * monster.damage,
     }
   })
-  // and return an array of monsters with their threat levels
-s
+}
+// and return an array of monsters with their threat levels
 
 /**
  * Extract all monster names into an array using Object methods
@@ -24,6 +23,14 @@ s
  */
 export function extractMonsterNames(monsters) {
   // TODO: Extract all monster names into an array using Object methods
+  const monsterNames = []
+  // biome-ignore lint/complexity/noForEach: <explanation>
+  Object.keys(monsters).forEach((key) => {
+    // biome-ignore lint/complexity/noForEach: <explanation>
+    monsters[key].forEach((monster) => {
+      monsterNames.push(monster.name)
+    })
+  })
 }
 
 /**
