@@ -19,6 +19,7 @@ describe('Monster Names Extraction', () => {
 
     // Check that all expected names are present
     expect(result).toHaveLength(expectedNames.length)
+    // biome-ignore lint/complexity/noForEach: <explanation>
     expectedNames.forEach((name) => {
       expect(result).toContain(name)
     })
@@ -39,6 +40,7 @@ describe('Threat Level Calculation', () => {
     const result = calculateThreatLevels(data)
 
     // Check each monster has correct threat level
+    // biome-ignore lint/complexity/noForEach: <explanation>
     expectedThreatLevels.forEach((expected) => {
       const monster = result.find((m) => m.name === expected.name)
       expect(monster).toBeDefined()
