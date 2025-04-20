@@ -44,6 +44,22 @@ export function organizeByThreatLevel(monsters) {
   // lowThreat: < 10,000
   // mediumThreat: between 10,000 and 50,000
   // highThreat: > 50,000
+  const organizedMonsters = {
+    lowThreat: [],
+    mediumThreat: [],
+    highThreat: [],
+  }
+  const threatLevels = calculateThreatLevels(monsters)
+  // biome-ignore lint/complexity/noForEach: <explanation>
+  threatLevels.forEach((monster) => {
+    if (monster.threatLevel < 10000) {
+      organizedMonsters.lowThreat.push(monster)
+    } else if (monster.threatLevel >= 10000 && monster.threatLevel <= 50000) {
+      organizedMonsters.mediumThreat.push(monster)
+    } else {
+      organizedMonsters.highThreat.push(monster)
+    }
+  })
 }
 
 export function sum(a, b) {
