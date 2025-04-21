@@ -5,31 +5,35 @@ import data from './data.js'
  * @param {Object} monsters - The monsters data object
  * @return {Array} - Array of objects with name and threatLevel properties
  */
-export function calculateThreatLevels(monsters) {
+
+export function calculateThreatLevels({ demons }) {
   // TODO: Calculate the threat level (health × damage) for each monster
-  return monsters.map((monster) => {
-    return {
-      name: monster.name,
-      threatLevel: monster.health * monster.damage,
-    }
+  const threatLevels = [] // Initialize the array we will use to store the values.
+  Object.keys(demons).forEach((difficulty) => {
+    demons[difficulty].forEach((demons) => {
+      threatLevels.push({
+        name: demons.name,
+        threatLevel: demons.health * demons.damage,
+      })
+    })
   })
+  // and return an array of monsters with their threat levels
+  return threatLevels
 }
-// and return an array of monsters with their threat levels
 
 /**
  * Extract all monster names into an array using Object methods
  * @param {Object} monsters - The monsters data object
  * @return {Array} - Array of all monster names
  */
-export function extractMonsterNames(monsters) {
+export function extractMonsterNames({ demons }) {
   // TODO: Extract all monster names into an array using Object methods
   const monsterNames = []
-  // biome-ignore lint/complexity/noForEach: <explanation>
-  Object.keys(monsters).forEach((key) => {
-    // biome-ignore lint/complexity/noForEach: <explanation>
-    monsters[key].forEach((monster) => {
-      monsterNames.push(monster.name)
+  Object.keys(demons).forEach((difficulty) => {
+    demons[difficulty].forEach((demon) => {
+      monsterNames.push(demon.name)
     })
+    return monsterNames
   })
 }
 
@@ -50,7 +54,6 @@ export function organizeByThreatLevel(monsters) {
     highThreat: [],
   }
   const threatLevels = calculateThreatLevels(monsters)
-  // biome-ignore lint/complexity/noForEach: <explanation>
   threatLevels.forEach((monster) => {
     if (monster.threatLevel < 10000) {
       organizedMonsters.lowThreat.push(monster)
