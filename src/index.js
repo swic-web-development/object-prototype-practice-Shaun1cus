@@ -43,27 +43,25 @@ export function extractMonsterNames({ demons }) {
  * @param {Object} monsters - The monsters data object
  * @return {Object} - Object with lowThreat, mediumThreat, and highThreat arrays
  */
-export function organizeByThreatLevel({ demons }) {
+export function organizeByThreatLevel({ threatLevels }) {
   // TODO: Transform the data structure to organize monsters by threat level
-  // instead of difficulty
-  // lowThreat: < 10,000
-  // mediumThreat: between 10,000 and 50,000
-  // highThreat: > 50,000
-  const organizedMonsters = {
-    lowThreat: [],
-    mediumThreat: [],
-    highThreat: [],
+  // Categorize monsters based on their threat levels
+  const lowThreat = threatLevels.filter(({ threatLevel }) => threatLevel < 10000)
+  lowThreat.sort((a, b) => a.threatLevel - b.threatLevel)
+
+  const mediumThreat = threatLevels.filter(
+    ({ threatLevel }) => threatLevel >= 10000 && threatLevel <= 50000,
+  )
+  mediumThreat.sort((a, b) => a.threatLevel - b.threatLevel)
+
+  const highThreat = threatLevels.filter(({ threatLevel }) => threatLevel > 50000)
+  highThreat.sort((a, b) => a.threatLevel - b.threatLevel)
+
+  return {
+    lowThreat,
+    mediumThreat,
+    highThreat,
   }
-  const threatLevels = calculateThreatLevels(monsters)
-  threatLevels.forEach((monster) => {
-    if (monster.threatLevel < 10000) {
-      organizedMonsters.lowThreat.push(monster)
-    } else if (monster.threatLevel >= 10000 && monster.threatLevel <= 50000) {
-      organizedMonsters.mediumThreat.push(monster)
-    } else {
-      organizedMonsters.highThreat.push(monster)
-    }
-  })
 }
 
 export function sum(a, b) {
