@@ -1,4 +1,4 @@
-import data from './data.js'
+// import data from './data.js'
 
 /**
  * Calculate the threat level (health × damage) for each monster
