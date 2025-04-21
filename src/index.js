@@ -33,8 +33,9 @@ export function extractMonsterNames({ demons }) {
     demons[difficulty].forEach((demon) => {
       monsterNames.push(demon.name)
     })
-    return monsterNames
   })
+
+  return monsterNames
 }
 
 /**
@@ -42,7 +43,7 @@ export function extractMonsterNames({ demons }) {
  * @param {Object} monsters - The monsters data object
  * @return {Object} - Object with lowThreat, mediumThreat, and highThreat arrays
  */
-export function organizeByThreatLevel(monsters) {
+export function organizeByThreatLevel({ demons }) {
   // TODO: Transform the data structure to organize monsters by threat level
   // instead of difficulty
   // lowThreat: < 10,000
