@@ -1,24 +1,17 @@
-// import data from './data.js'
-
 /**
  * Calculate the threat level (health × damage) for each monster
  * @param {Object} monsters - The monsters data object
  * @return {Array} - Array of objects with name and threatLevel properties
  */
 
-export function calculateThreatLevels({ demons }) {
+export function calculateThreatLevels(monsters) {
   // TODO: Calculate the threat level (health × damage) for each monster
-  const threatLevels = [] // Initialize the array we will use to store the values.
-  Object.keys(demons).forEach((difficulty) => {
-    demons[difficulty].forEach((demons) => {
-      threatLevels.push({
-        name: demons.name,
-        threatLevel: demons.health * demons.damage,
-      })
-    })
-  })
-  // and return an array of monsters with their threat levels
-  return threatLevels
+  return Object.values(monsters.demons)
+    .flat()
+    .map(({ name, health, damage }) => ({
+      name,
+      threatLevel: health * damage,
+    }))
 }
 
 /**
