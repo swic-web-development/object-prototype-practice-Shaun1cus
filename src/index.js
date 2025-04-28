@@ -1,3 +1,5 @@
+const flattenMonsters = ({ demons }) => Object.values(demons).flat()
+
 /**
  * Calculate the threat level (health × damage) for each monster
  * @param {Object} monsters - The monsters data object
@@ -6,12 +8,10 @@
 
 export function calculateThreatLevels(monsters) {
   // TODO: Calculate the threat level (health × damage) for each monster
-  return Object.values(monsters.demons)
-    .flat()
-    .map(({ name, health, damage }) => ({
-      name,
-      threatLevel: health * damage,
-    }))
+  return flattenMonsters(monsters).map(({ name, health, damage }) => ({
+    name,
+    threatLevel: health * damage,
+  }))
 }
 
 /**
@@ -19,16 +19,9 @@ export function calculateThreatLevels(monsters) {
  * @param {Object} monsters - The monsters data object
  * @return {Array} - Array of all monster names
  */
-export function extractMonsterNames({ demons }) {
+export function extractMonsterNames(monsters) {
   // TODO: Extract all monster names into an array using Object methods
-  const monsterNames = []
-  Object.keys(demons).forEach((difficulty) => {
-    demons[difficulty].forEach((demon) => {
-      monsterNames.push(demon.name)
-    })
-  })
-
-  return monsterNames
+  return flattenMonsters(monsters).map(({ name }) => name)
 }
 
 /**
