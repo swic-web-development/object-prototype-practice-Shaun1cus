@@ -49,11 +49,7 @@ describe('Threat Level Calculation', () => {
 
 describe('Monster Organization by Threat Level', () => {
   test('should organize monsters by threat level categories', () => {
-    // Step 1: Calculate threat levels
-    const threatLevels = calculateThreatLevels(data)
-
-    // Step 2: Pass threatLevels to organizeByThreatLevel
-    const result = organizeByThreatLevel({ threatLevels })
+    const result = organizeByThreatLevel(data)
 
     // Test structure
     expect(result).toHaveProperty('lowThreat')
